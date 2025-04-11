@@ -1,6 +1,7 @@
 package com.ashokit.controller;
 
 import com.ashokit.dto.PhoneBookDto;
+import com.ashokit.entity.PhoneBook;
 import com.ashokit.service.PhoneBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,9 @@ public class PhoneBookController {
     private PhoneBookService phoneBookService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody PhoneBookDto dto) {
-        phoneBookService.save(dto);
-        return new ResponseEntity<>("Record saved", HttpStatus.CREATED);
+    public ResponseEntity<PhoneBook> save(@RequestBody PhoneBookDto dto) {
+        PhoneBook save = phoneBookService.save(dto);
+        return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
 
     @GetMapping("/")

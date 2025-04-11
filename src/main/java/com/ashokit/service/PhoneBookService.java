@@ -13,9 +13,11 @@ public class PhoneBookService {
     @Autowired
     private PhoneBookRepository repository;
 
-    public void save(PhoneBookDto dto) {
+    public PhoneBook save(PhoneBookDto dto) {
         PhoneBook pb=new PhoneBook();
         BeanUtils.copyProperties(dto,pb);
-        repository.save(pb);
+        PhoneBook save = repository.save(pb);
+        BeanUtils.copyProperties(pb,dto);
+        return pb;
     }
 }
